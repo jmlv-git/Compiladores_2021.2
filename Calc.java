@@ -1,5 +1,9 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
 public class Calc {
 
@@ -55,21 +59,33 @@ public class Calc {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+// usando Scanner para ler entrada	
+//		Scanner in = new Scanner (System.in);
+//		
+//		Stack pilha = new Stack();
+//		
+//		while(in.hasNext()) {
+//			String aux = in.nextLine();
+//			pilha.push(aux);
+//		}
+//		calcu(pilha);
+//		System.out.println(pilha.pop());
 		
-		Scanner in = new Scanner (System.in);
+// lendo entrada de um arquivo			
+		 Path path = Path.of("src/Calc1.stk");
+	     String content = new String(Files.readAllBytes(path));
+	     StringTokenizer st = new StringTokenizer(content, "\r\n");
+	     Stack pilha = new Stack();
 		
-		Stack pilha = new Stack();
-		
-		while(in.hasNext()) {
-			String aux = in.nextLine();
-			pilha.push(aux);
-		}
-		calcu(pilha);
-		System.out.println(pilha.pop());
-		
-		
-		
+	     
+	     while (st.hasMoreTokens()) {
+	            String token = st.nextToken();
+	            pilha.push(token);
+	        }
+	     calcu(pilha);
+	     System.out.println(pilha.pop());
+	     
 	}
 
 }
